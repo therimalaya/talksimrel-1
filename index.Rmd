@@ -10,6 +10,7 @@ fontsize: 10pt
 linestretch: 1.25
 output: 
   ioslides_presentation:
+    output_dir: "."
     dev: svg
     self_contained: false
     css: '_css/styles.css'
