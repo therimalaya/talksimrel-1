@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>A versatile tool for simulation of linear model data</title>
+
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="generator" content="pandoc" />
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <base target="_blank">
+
+  <script type="text/javascript">
+    var SLIDE_CONFIG = {
+      // Slide settings
+      settings: {
+                title: 'A versatile tool for simulation of linear model data',
+                        useBuilds: true,
+        usePrettify: true,
+        enableSlideAreas: true,
+        enableTouch: true,
+                        favIcon: 'index_files/logo.png',
+              },
+
+      // Author information
+      presenters: [
+            {
+        name:  'Raju Rimal, Trygve Almøy and Solve Sæbø' ,
+        company: '',
+        gplus: '',
+        twitter: '',
+        www: '',
+        github: ''
+      },
+            ]
+    };
+  </script>
+
+  <link href="index_files/ioslides-13.5.1/fonts/fonts.css" rel="stylesheet" />
+  <link href="index_files/ioslides-13.5.1/theme/css/default.css" rel="stylesheet" />
+  <link href="index_files/ioslides-13.5.1/theme/css/phone.css" rel="stylesheet" />
+  <script src="index_files/ioslides-13.5.1/js/modernizr.custom.45394.js"></script>
+  <script src="index_files/ioslides-13.5.1/js/prettify/prettify.js"></script>
+  <script src="index_files/ioslides-13.5.1/js/prettify/lang-r.js"></script>
+  <script src="index_files/ioslides-13.5.1/js/prettify/lang-yaml.js"></script>
+  <script src="index_files/ioslides-13.5.1/js/hammer.js"></script>
+  <script src="index_files/ioslides-13.5.1/js/slide-controller.js"></script>
+  <script src="index_files/ioslides-13.5.1/js/slide-deck.js"></script>
+
+  <style type="text/css">
+
+    b, strong {
+      font-weight: bold;
+    }
+
+    em {
+      font-style: italic;
+    }
+
+    slides > slide {
+      -webkit-transition: all 0.4s ease-in-out;
+      -moz-transition: all 0.4s ease-in-out;
+      -o-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+    }
+
+    .auto-fadein {
+      -webkit-transition: opacity 0.6s ease-in;
+      -webkit-transition-delay: 0.4s;
+      -moz-transition: opacity 0.6s ease-in 0.4s;
+      -o-transition: opacity 0.6s ease-in 0.4s;
+      transition: opacity 0.6s ease-in 0.4s;
+      opacity: 0;
+    }
+
+    slides > slide:not(.nobackground):before {
+      font-size: 12pt;
+      content: "";
+      position: absolute;
+      bottom: 20px;
+      left: 60px;
+      background: url(index_files/logo.png) no-repeat 0 50%;
+      -webkit-background-size: 30px 30px;
+      -moz-background-size: 30px 30px;
+      -o-background-size: 30px 30px;
+      background-size: 30px 30px;
+      padding-left: 40px;
+      height: 30px;
+      line-height: 1.9;
+    }
+  </style>
+
+  <link rel="stylesheet" href="_css/styles.css" type="text/css" />
+
+</head>
+
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+
+  <slide class="title-slide segue nobackground">
+        <aside class="gdbar"><img src="index_files/logo.png"></aside>
+        <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title><!-- populated from slide_config.json --></h1>
+      <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+      <p data-config-presenter><!-- populated from slide_config.json --></p>
+            <p style="margin-top: 6px; margin-left: -2px;">12 Mar, 2018</p>
+          </hgroup>
+  </slide>
+
+<slide class=""><hgroup><h2></h2></hgroup><article  class="flexbox vcenter plain" id="section">
+
+<p><img src="_images/papershot.png" width="100%" style="display: block; margin: auto;" /></p>
+
+<blockquote cite="http://www.imdb.com/character/ch0000672/quotes" id="main-quote">
+
+<p class="quotation">
+
+Even the simplest tools can empower people to do great things
+
+</p>
+
+<footer>
+
+— Biz Stone, <cite>Things a Little Bird Told Me: Confessions of the Creative Mind</cite>
+
+</footer>
+
+</blockquote>
+
+</article></slide><slide class=""><hgroup><h2>Why Simrel</h2></hgroup><article  class="columns-2 plain" id="why-simrel">
+
+
+
+<ul>
+<li><p>Simulated data is <strong>used everywhere</strong> in research to compare methods, models, algorithms, techniques etc. <code>Simrel</code> can be a common tool for such purpose</p></li>
+<li><p>Simulate <em>linear model</em> data with <em>wide range of properties</em> using <strong>small set of tuning paramters</strong>, Example:</p>
+
+<ul>
+<li><p>Controlling <em>degree of multicollinearity</em> in the simulated data</p></li>
+<li><p>Specifying the <em>relevant principle components</em> for prediction</p></li>
+</ul></li>
+</ul>
+
+<div style="break-before: column;">
+</div>
+
+
+
+<p><img src="_images/multicollinearity.gif" width="100%" style="display: block; margin: auto;" /></p>
+
+
+
+</article></slide><slide class=""><hgroup><h2>Idea Behind</h2></hgroup><article  class="columns-2 plain" id="idea-behind">
+
+
+
+<p><em>Reduction of regression Model</em>: A Predictor sub-space (<span class="blue">
+blue</span>) is relevant for informative response sub-space (<span class="green">
+green</span>)</p>
+
+<p><img src="_images/relevant-space.svg" width="100%" style="display: block; margin: auto;" /></p>
+
+<div style="break-before: column;">
+</div>
+
+
+
+<h3>
+
+The Model:
+
+</h3>
+
+<p>\[\begin{bmatrix}y \\ x \end{bmatrix} \sim \text{N}\left(
+\begin{bmatrix}
+\mu_y \\ \mu_x
+\end{bmatrix}, 
+\begin{bmatrix}
+\Sigma_{yy} &amp; \Sigma_{yx}\\
+\Sigma_{xy} &amp; \Sigma_{xx}
+\end{bmatrix}
+\right)\]</p>
+
+<p>Define a linear tranformation as \(z = Rx\) and \(w = Qy\). For any orthogonormal matrix \(R\) and \(Q\), we can imagine them as a rotation (eigenvector) matrix, so,</p>
+
+<p>\[\begin{bmatrix}y \\ x \end{bmatrix} \sim \text{N}\left(
+\begin{bmatrix}
+Q^t\mu_w \\ R^t\mu_z
+\end{bmatrix}, 
+\begin{bmatrix}
+Q^t\Sigma_{ww}Q &amp; Q^t\Sigma_{wz}R\\
+R^t\Sigma_{zw}Q &amp; R^t\Sigma_{zz}R
+\end{bmatrix}
+\right)\]</p>
+
+<p>There are \(\frac{1}{2}(p + m)(p + m + 1)\) unknowns to identify this model. But, …</p>
+
+
+
+</article></slide><slide class=""><hgroup><h2>Reduction of Regression Model</h2></hgroup><article  class="columns-2 plain" id="reduction-of-regression-model">
+
+</article></slide><slide class=""><hgroup><h2>How it works</h2></hgroup><article  class="columns-3 plain" id="how-it-works">
+
+
+
+<p><img src="index_files/figure-html/unnamed-chunk-7-1.svg" width="100%" style="display: block; margin: auto;" /></p>
+
+<div style="break-before: column;">
+</div>
+
+
+
+<p><img src="index_files/figure-html/unnamed-chunk-8-1.svg" width="100%" style="display: block; margin: auto;" /></p>
+
+<div style="break-before: column;">
+</div>
+
+
+
+<p><img src="index_files/figure-html/unnamed-chunk-9-1.svg" width="100%" style="display: block; margin: auto;" /></p>
+
+
+
+</article></slide><slide class=""><hgroup><h2>How it works</h2></hgroup><article  class="columns-3 plain" id="how-it-works-1">
+
+
+
+<p><img src="index_files/figure-html/unnamed-chunk-10-1.svg" width="100%" style="display: block; margin: auto;" /></p>
+
+<div style="break-before: column;">
+</div>
+
+
+
+<p><img src="index_files/figure-html/unnamed-chunk-11-1.svg" width="100%" style="display: block; margin: auto;" /></p>
+
+<div style="break-before: column;">
+</div>
+
+
+
+<p><img src="index_files/figure-html/unnamed-chunk-12-1.svg" width="100%" style="display: block; margin: auto;" /></p>
+
+
+
+</article></slide><slide class=""><hgroup><h2>Where Simrel</h2></hgroup><article  class="plain" id="where-simrel">
+
+</article></slide><slide class=""><hgroup><h2>Example Simrel</h2></hgroup><article  class="plain" id="example-simrel">
+
+</article></slide><slide class=""><hgroup><h2>Acknoledgement</h2></hgroup><article  class="plain" id="acknoledgement">
+
+<ul>
+<li>Trygve</li>
+<li>Solve</li>
+<li>Franchisco</li>
+<li>Lars</li>
+</ul>
+
+</article></slide><slide class="fill nobackground" style="background-image: url(_images/ThankYou.png); background-size: 100% 100%; background-position: center;"><hgroup><h2></h2></hgroup><article  class="plain" id="section-1"></article></slide>
+
+
+  <slide class="backdrop"></slide>
+
+</slides>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+<!-- map slide visiblity events into shiny -->
+<script>
+  (function() {
+    if (window.jQuery) {
+       window.jQuery(document).on('slideleave', function(e) {
+         window.jQuery(e.target).trigger('hidden');
+      });
+       window.jQuery(document).on('slideenter', function(e) {
+         window.jQuery(e.target).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>
