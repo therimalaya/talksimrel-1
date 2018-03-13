@@ -111,11 +111,11 @@
       <h1 data-config-title><!-- populated from slide_config.json --></h1>
       <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
       <p data-config-presenter><!-- populated from slide_config.json --></p>
-            <p style="margin-top: 6px; margin-left: -2px;">12 Mar, 2018</p>
+            <p style="margin-top: 6px; margin-left: -2px;">13 Mar, 2018</p>
           </hgroup>
   </slide>
 
-<slide class=""><hgroup><h2></h2></hgroup><article  class="flexbox vcenter plain" id="section">
+<slide class=""><hgroup><h2></h2></hgroup><article  id="section" class="flexbox vcenter plain">
 
 <p><img src="_images/papershot.png" width="100%" style="display: block; margin: auto;" /></p>
 
@@ -135,7 +135,7 @@ Even the simplest tools can empower people to do great things
 
 </blockquote>
 
-</article></slide><slide class=""><hgroup><h2>Why Simrel</h2></hgroup><article  class="columns-2 plain" id="why-simrel">
+</article></slide><slide class=""><hgroup><h2>Why Simrel</h2></hgroup><article  id="why-simrel" class="columns-2 plain">
 
 
 
@@ -158,7 +158,7 @@ Even the simplest tools can empower people to do great things
 
 
 
-</article></slide><slide class=""><hgroup><h2>Idea Behind</h2></hgroup><article  class="columns-2 plain" id="idea-behind">
+</article></slide><slide class=""><hgroup><h2>Idea Behind</h2></hgroup><article  id="idea-behind" class="columns-2 plain">
 
 
 
@@ -182,19 +182,19 @@ The Model:
 <p>\[\begin{bmatrix}y \\ x \end{bmatrix} \sim \text{N}\left(
 \begin{bmatrix}
 \mu_y \\ \mu_x
-\end{bmatrix}, 
+\end{bmatrix},
 \begin{bmatrix}
 \Sigma_{yy} &amp; \Sigma_{yx}\\
 \Sigma_{xy} &amp; \Sigma_{xx}
 \end{bmatrix}
 \right)\]</p>
 
-<p>Define a linear tranformation as \(z = Rx\) and \(w = Qy\). For any orthogonormal matrix \(R\) and \(Q\), we can imagine them as a rotation (eigenvector) matrix, so,</p>
+<p>Define a linear tranformation as \(z = Rx\) and \(w = Qy\), for any orthogonormal matrix \(R\) and \(Q\), we can imagine them as a rotation (eigenvector) matrix, so,</p>
 
 <p>\[\begin{bmatrix}y \\ x \end{bmatrix} \sim \text{N}\left(
 \begin{bmatrix}
 Q^t\mu_w \\ R^t\mu_z
-\end{bmatrix}, 
+\end{bmatrix},
 \begin{bmatrix}
 Q^t\Sigma_{ww}Q &amp; Q^t\Sigma_{wz}R\\
 R^t\Sigma_{zw}Q &amp; R^t\Sigma_{zz}R
@@ -205,20 +205,61 @@ R^t\Sigma_{zw}Q &amp; R^t\Sigma_{zz}R
 
 
 
-</article></slide><slide class=""><hgroup><h2>Reduction of Regression Model</h2></hgroup><article  class="columns-2 plain" id="reduction-of-regression-model">
-
-</article></slide><slide class=""><hgroup><h2>How it works</h2></hgroup><article  class="columns-3 plain" id="how-it-works">
+</article></slide><slide class=""><hgroup><h2>Reduction of Regression Model</h2></hgroup><article  id="reduction-of-regression-model" class="columns-2 plain">
 
 
 
-<p><img src="index_files/figure-html/unnamed-chunk-7-1.svg" width="100%" style="display: block; margin: auto;" /></p>
+<p><em>Reduction of regression Model</em>: A Predictor sub-space (<span class="blue">
+blue</span>) is relevant for informative response sub-space (<span class="green">
+green</span>)</p>
+
+<p><img src="_images/relevant-space.svg" width="100%" style="display: block; margin: auto;" /></p>
 
 <div style="break-before: column;">
 </div>
 
 
 
+<p>\[
+\begin{aligned}
+\Sigma_{ww} &amp;= \text{diag}(\kappa_1, \ldots, \kappa_m),
+  \kappa_j = e^{-\eta(y_j - 1), \; \eta &gt; 0} \\
+\Sigma_{zz} &amp;= \text{diag}(\lambda_1, \ldots, \lambda_p),
+  \lambda_i = e^{-\gamma(x_i - 1), \; \gamma &gt; 0}
+\end{aligned}
+\]</p>
+
+<p>We need to meet the constrains:</p>
+
+<p>\[
+\begin{aligned}
+\rho_w^2 &amp;= \Sigma_{ww}^{-1/2} \Sigma_{zw}^{t} \Sigma_{zz}^{-1} \Sigma_{zw} \Sigma_{ww}^{-1/2} \\
+ &amp;= \frac{\sigma_{ij}^t \Lambda ^{-1} \sigma_{ij&#39;}}{\sqrt{\sigma_j^2\sigma_{j&#39;}^2}} \forall j, j&#39; = 1 \ldots m
+\end{aligned}
+\]</p>
+
+<p>We assume there are no overlapping relevant components and there exist a subspace in predictor relevant to a subspace in response. This gives us,</p>
+
+<p>\[
+\rho_{w_j}^2 = \sum_{i=1}^p{\frac{\sigma^2_{ij}}{\lambda_i\kappa_j}}
+  = \sum_{i\in \mathcal{P}}{\frac{\sigma^2_{ij}}{\lambda_i\kappa_j}}
+\]</p>
+
+
+
+</article></slide><slide class=""><hgroup><h2>The Covariance Structure</h2></hgroup><article  id="the-covariance-structure" class="columns-3 plain">
+
+
+
 <p><img src="index_files/figure-html/unnamed-chunk-8-1.svg" width="100%" style="display: block; margin: auto;" /></p>
+
+<p>\[
+\begin{aligned}
+\rho_{w_1}^2 &amp;= \sum_{i\in \mathcal{P}}{\frac{\sigma^2_{i1}}{\lambda_i\kappa_1}}\\
+  &amp;= \frac{\sigma_{11}^2}{\lambda_1\kappa_1} +
+    \frac{\sigma_{21}^2}{\lambda_2\kappa_1}
+\end{aligned}
+\]</p>
 
 <div style="break-before: column;">
 </div>
@@ -227,20 +268,42 @@ R^t\Sigma_{zw}Q &amp; R^t\Sigma_{zz}R
 
 <p><img src="index_files/figure-html/unnamed-chunk-9-1.svg" width="100%" style="display: block; margin: auto;" /></p>
 
-
-
-</article></slide><slide class=""><hgroup><h2>How it works</h2></hgroup><article  class="columns-3 plain" id="how-it-works-1">
-
-
-
-<p><img src="index_files/figure-html/unnamed-chunk-10-1.svg" width="100%" style="display: block; margin: auto;" /></p>
+<p>\[
+\Sigma =
+\begin{bmatrix}
+\Sigma_{yy} &amp; \Sigma_{yx}\\
+\Sigma_{xy} &amp; \Sigma_{xx}
+\end{bmatrix} \\
+= \begin{bmatrix}
+Q^t\Sigma_{ww}Q &amp; Q^t\Sigma_{wz}R\\
+R^t\Sigma_{zw}Q &amp; R^t\Sigma_{zz}R
+\end{bmatrix}
+\]</p>
 
 <div style="break-before: column;">
 </div>
 
 
 
+<p><img src="index_files/figure-html/unnamed-chunk-10-1.svg" width="100%" style="display: block; margin: auto;" /></p>
+
+<p>Define, \[\underset{n\times(m+p)}{G} = U\Sigma^{-1/2}\] \[\text{such that, } \text{cov}(G) = \Sigma\]</p>
+
+
+
+</article></slide><slide class=""><hgroup><h2>The Covariance Structure</h2></hgroup><article  id="the-covariance-structure-1" class="columns-3 plain">
+
+
+
 <p><img src="index_files/figure-html/unnamed-chunk-11-1.svg" width="100%" style="display: block; margin: auto;" /></p>
+
+<p>\[
+\begin{aligned}
+\rho_{w_1}^2 &amp;= \sum_{i\in \mathcal{P}}{\frac{\sigma^2_{i1}}{\lambda_i\kappa_1}}\\
+  &amp;= \frac{\sigma_{11}^2}{\lambda_1\kappa_1} +
+    \frac{\sigma_{21}^2}{\lambda_2\kappa_1}
+\end{aligned}
+\]</p>
 
 <div style="break-before: column;">
 </div>
@@ -249,13 +312,54 @@ R^t\Sigma_{zw}Q &amp; R^t\Sigma_{zz}R
 
 <p><img src="index_files/figure-html/unnamed-chunk-12-1.svg" width="100%" style="display: block; margin: auto;" /></p>
 
+<p>\[
+\Sigma =
+\begin{bmatrix}
+\Sigma_{yy} &amp; \Sigma_{yx}\\
+\Sigma_{xy} &amp; \Sigma_{xx}
+\end{bmatrix} \\
+= \begin{bmatrix}
+Q^t\Sigma_{ww}Q &amp; Q^t\Sigma_{wz}R\\
+R^t\Sigma_{zw}Q &amp; R^t\Sigma_{zz}R
+\end{bmatrix}
+\]</p>
+
+<div style="break-before: column;">
+</div>
 
 
-</article></slide><slide class=""><hgroup><h2>Where Simrel</h2></hgroup><article  class="plain" id="where-simrel">
 
-</article></slide><slide class=""><hgroup><h2>Example Simrel</h2></hgroup><article  class="plain" id="example-simrel">
+<p><img src="index_files/figure-html/unnamed-chunk-13-1.svg" width="100%" style="display: block; margin: auto;" /></p>
 
-</article></slide><slide class=""><hgroup><h2>Acknoledgement</h2></hgroup><article  class="plain" id="acknoledgement">
+<p>Define, \[\underset{n\times(m+p)}{G} = U\Sigma^{-1/2}\] \[\text{such that, } \text{cov}(G) = \Sigma\]</p>
+
+
+
+</article></slide><slide class=""><hgroup><h2>Accessing Properties of Data</h2></hgroup><article  id="accessing-properties-of-data" class="columns-3 plain">
+
+
+
+<p><img src="index_files/figure-html/unnamed-chunk-14-1.svg" width="100%" style="display: block; margin: auto;" /></p>
+
+<div style="break-before: column;">
+</div>
+
+
+
+<p><img src="index_files/figure-html/unnamed-chunk-15-1.svg" width="100%" style="display: block; margin: auto;" /></p>
+
+<div style="break-before: column;">
+</div>
+
+
+
+<p><img src="index_files/figure-html/unnamed-chunk-16-1.svg" width="100%" style="display: block; margin: auto;" /></p>
+
+
+
+</article></slide><slide class=""><hgroup><h2>Example Simrel</h2></hgroup><article  id="example-simrel" class="plain">
+
+</article></slide><slide class=""><hgroup><h2>Acknoledgement</h2></hgroup><article  id="acknoledgement" class="plain">
 
 <ul>
 <li>Trygve</li>

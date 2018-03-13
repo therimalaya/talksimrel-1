@@ -4,11 +4,11 @@ author: Raju Rimal, Trygve Almøy and Solve Sæbø
 date: "`r format(Sys.Date(), '%d %b, %Y')`"
 institute: |
   Faculty of Chemistry and Bioinformatics (KBM)
-  
+
   Norwegian University of Life Scienes (NMBU)
 fontsize: 10pt
 linestretch: 1.25
-output: 
+output:
   ioslides_presentation:
     output_dir: "."
     dev: svg
@@ -27,7 +27,7 @@ output:
     theme: CambridgeUS
     colortheme: seahorse
 # runtime: shiny
-editor_options: 
+editor_options:
   chunk_output_type: console
 ---
 
@@ -36,18 +36,20 @@ editor_options:
 Sys.setenv(RGL_USE_NULL = TRUE)
 library(knitr)
 library(rgl)
+library(tidyverse)
+library(plotly)
+library(simrel)
 knit_hooks$set(webgl = hook_webgl)
 opts_chunk$set(
-  comment = NA, fig.align = 'center', 
+  comment = NA, fig.align = 'center',
   echo = FALSE, out.width = '100%',
   retina = 2)
 is_latex <- knitr::is_latex_output()
-library(simrel)
-library(ggplot2)
 ```
 
 ```{r, echo=FALSE}
-sobj <- simrel(n = 20, p = 10, q = c(5, 4), m = 4, ypos = list(c(1, 4), c(2, 3)),
+sobj <- simrel(n = 20, p = 10, q = c(5, 4), m = 4,
+               ypos = list(c(1, 4), c(2, 3)),
                relpos = list(c(1, 2), c(3, 5)), R2 = c(0.8, 0.8),
                gamma = 0.6, type = "multivariate", eta = 0.2)
 ```
@@ -73,7 +75,7 @@ knitr::include_graphics("_images/papershot.png")
 - Simulate _linear model_ data with _wide range of properties_ using __small set of tuning paramters__, Example:
 
     * Controlling _degree of multicollinearity_ in the simulated data
-    
+
     * Specifying the _relevant principle components_ for prediction
 
 <div style="break-before: column;"></div>
@@ -116,19 +118,19 @@ if (is_latex) {
 $$\begin{bmatrix}y \\ x \end{bmatrix} \sim \text{N}\left(
 \begin{bmatrix}
 \mu_y \\ \mu_x
-\end{bmatrix}, 
+\end{bmatrix},
 \begin{bmatrix}
 \Sigma_{yy} & \Sigma_{yx}\\
 \Sigma_{xy} & \Sigma_{xx}
 \end{bmatrix}
 \right)$$
 
-Define a linear tranformation as $z = Rx$ and $w = Qy$. For any orthogonormal matrix $R$ and $Q$, we can imagine them as a rotation (eigenvector) matrix, so,
+Define a linear tranformation as $z = Rx$ and $w = Qy$, for any orthogonormal matrix $R$ and $Q$, we can imagine them as a rotation (eigenvector) matrix, so,
 
 $$\begin{bmatrix}y \\ x \end{bmatrix} \sim \text{N}\left(
 \begin{bmatrix}
 Q^t\mu_w \\ R^t\mu_z
-\end{bmatrix}, 
+\end{bmatrix},
 \begin{bmatrix}
 Q^t\Sigma_{ww}Q & Q^t\Sigma_{wz}R\\
 R^t\Sigma_{zw}Q & R^t\Sigma_{zz}R
@@ -142,7 +144,53 @@ There are $\frac{1}{2}(p + m)(p + m + 1)$ unknowns to identify this model. But, 
 
 ## Reduction of Regression Model {.columns-2 .plain}
 
-## How it works {.columns-3 .plain}
+\begincols
+\begincol{0.5\textwidth}
+
+_Reduction of regression Model_: A Predictor sub-space (<span class="blue">blue</span>) is relevant for informative response sub-space (<span class="green">green</span>)
+
+```{r}
+if (is_latex) {
+  knitr::include_graphics("_images/relevant-space.pdf")
+} else {
+  knitr::include_graphics("_images/relevant-space.svg")
+}
+```
+
+<div style="break-before: column;"></div>
+
+\endcol
+\begincol{0.5\textwidth}
+
+$$
+\begin{aligned}
+\Sigma_{ww} &= \text{diag}(\kappa_1, \ldots, \kappa_m),
+  \kappa_j = e^{-\eta(y_j - 1), \; \eta > 0} \\
+\Sigma_{zz} &= \text{diag}(\lambda_1, \ldots, \lambda_p),
+  \lambda_i = e^{-\gamma(x_i - 1), \; \gamma > 0}
+\end{aligned}
+$$
+
+We need to meet the constrains:
+
+$$
+\begin{aligned}
+\rho_w^2 &= \Sigma_{ww}^{-1/2} \Sigma_{zw}^{t} \Sigma_{zz}^{-1} \Sigma_{zw} \Sigma_{ww}^{-1/2} \\
+ &= \frac{\sigma_{ij}^t \Lambda ^{-1} \sigma_{ij'}}{\sqrt{\sigma_j^2\sigma_{j'}^2}} \forall j, j' = 1 \ldots m
+\end{aligned}
+$$
+
+We assume there are no overlapping relevant components and there exist a subspace in predictor relevant to a subspace in response. This  gives us,
+
+$$
+\rho_{w_j}^2 = \sum_{i=1}^p{\frac{\sigma^2_{ij}}{\lambda_i\kappa_j}}
+  = \sum_{i\in \mathcal{P}}{\frac{\sigma^2_{ij}}{\lambda_i\kappa_j}}
+$$
+
+\endcol
+\endcols
+
+## The Covariance Structure {.columns-3 .plain}
 
 ```{r}
 plt_types <- c("relpos", "rotation", "relpred")
@@ -162,6 +210,14 @@ plts <- lapply(plt_types, function(t){
 plts[["relpos"]][[1]]
 ```
 
+$$
+\begin{aligned}
+\rho_{w_1}^2 &= \sum_{i\in \mathcal{P}}{\frac{\sigma^2_{i1}}{\lambda_i\kappa_1}}\\
+  &= \frac{\sigma_{11}^2}{\lambda_1\kappa_1} +
+    \frac{\sigma_{21}^2}{\lambda_2\kappa_1}
+\end{aligned}
+$$
+
 <div style="break-before: column;"></div>
 \endcol
 \begincol{0.32\textwidth}
@@ -169,6 +225,18 @@ plts[["relpos"]][[1]]
 ```{r, out.width='100%', message=FALSE, warning=FALSE, fig.width=3.5, fig.asp=1, dpi=300}
 plts[["rotation"]][[1]]
 ```
+
+$$
+\Sigma =
+\begin{bmatrix}
+\Sigma_{yy} & \Sigma_{yx}\\
+\Sigma_{xy} & \Sigma_{xx}
+\end{bmatrix} \\
+= \begin{bmatrix}
+Q^t\Sigma_{ww}Q & Q^t\Sigma_{wz}R\\
+R^t\Sigma_{zw}Q & R^t\Sigma_{zz}R
+\end{bmatrix}
+$$
 
 <div style="break-before: column;"></div>
 \endcol
@@ -178,10 +246,14 @@ plts[["rotation"]][[1]]
 plts[["relpred"]][[1]]
 ```
 
+Define,
+$$\underset{n\times(m+p)}{G} = U\Sigma^{-1/2}$$
+$$\text{such that, } \text{cov}(G) = \Sigma$$
+
 \endcol
 \endcols
 
-## How it works {.columns-3 .plain}
+## The Covariance Structure {.columns-3 .plain}
 
 \begincols
 \begincol{0.32\textwidth}
@@ -189,6 +261,14 @@ plts[["relpred"]][[1]]
 ```{r, out.width='100%', message=FALSE, warning=FALSE, fig.width=3.5, fig.asp=1, dpi=300}
 plts[["relpos"]][[2]]
 ```
+
+$$
+\begin{aligned}
+\rho_{w_1}^2 &= \sum_{i\in \mathcal{P}}{\frac{\sigma^2_{i1}}{\lambda_i\kappa_1}}\\
+  &= \frac{\sigma_{11}^2}{\lambda_1\kappa_1} +
+    \frac{\sigma_{21}^2}{\lambda_2\kappa_1}
+\end{aligned}
+$$
 
 <div style="break-before: column;"></div>
 \endcol
@@ -198,7 +278,21 @@ plts[["relpos"]][[2]]
 plts[["rotation"]][[2]]
 ```
 
+
+$$
+\Sigma =
+\begin{bmatrix}
+\Sigma_{yy} & \Sigma_{yx}\\
+\Sigma_{xy} & \Sigma_{xx}
+\end{bmatrix} \\
+= \begin{bmatrix}
+Q^t\Sigma_{ww}Q & Q^t\Sigma_{wz}R\\
+R^t\Sigma_{zw}Q & R^t\Sigma_{zz}R
+\end{bmatrix}
+$$
+
 <div style="break-before: column;"></div>
+
 \endcol
 \begincol{0.32\textwidth}
 
@@ -206,11 +300,42 @@ plts[["rotation"]][[2]]
 plts[["relpred"]][[2]]
 ```
 
+
+Define,
+$$\underset{n\times(m+p)}{G} = U\Sigma^{-1/2}$$
+$$\text{such that, } \text{cov}(G) = \Sigma$$
+
+
 \endcol
 \endcols
 
-## Where Simrel {.plain}
+## Accessing Properties of Data {.columns-3 .plain}
 
+\begincols
+\begincol{0.32\textwidth}
+
+```{r, fig.width=4}
+ggsimrelplot(sobj, which = 1)
+```
+
+<div style="break-before: column;"></div>
+\endcol
+\begincol{0.32\textwidth}
+
+```{r, fig.width=4}
+ggsimrelplot(sobj, which = 2)
+```
+
+<div style="break-before: column;"></div>
+\endcol
+\begincol{0.32\textwidth}
+
+```{r, fig.width=4}
+ggsimrelplot(sobj, which = 3)
+```
+
+\endcol
+\endcols
 
 ## Example Simrel {.plain}
 
