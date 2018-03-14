@@ -165,3 +165,53 @@ footer{
 footer cite{
   font-style: italic;
 }
+
+article#acknoledgement .card-container {
+  display: flex;
+  flex-direction: column;
+}
+
+article#acknoledgement .card-container .person {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
+    font-family: "EB Gramond", Gramond;
+    
+}
+article#acknoledgement .card-container .person .name {
+    padding-bottom: 25px;
+    margin-bottom: 0px;
+    padding-left: 10px;
+    line-height: 0.2em;
+}
+
+article#acknoledgement .card-container .person img{
+  max-width: 200px;
+  border: 10px solid whitesmoke;
+}
+
+#acknoledgement .thank-you-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 450px;
+    width: 450px;
+    align-items: center;
+    background-color: whitesmoke;
+    margin: 0 auto;
+    line-height: 0;
+}
+#acknoledgement .thank-you-container h3{
+  background-color: initial;
+  font-family: "EB Garamond", "Palatino", "Bookman old";
+  font-size: 3em;
+}
+#acknoledgement .thank-you-container #extra-thanks{
+  margin-top: -15px;
+    line-height: 0.25em;
+    text-align: center;
+}
+#acknoledgement .thank-you-container #extra-thanks p:first-child{
+  font-size: 1.4em;
+}

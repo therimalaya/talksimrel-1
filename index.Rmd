@@ -1,5 +1,5 @@
 ---
-title: "A versatile tool for simulation of linear model data"
+title: "A versatile tool for simulating linear model data"
 author: Raju Rimal, Trygve Almøy and Solve Sæbø
 date: "`r format(Sys.Date(), '%d %b, %Y')`"
 institute: |
@@ -8,6 +8,8 @@ institute: |
   Norwegian University of Life Scienes (NMBU)
 fontsize: 10pt
 linestretch: 1.25
+bibliography: references.bib
+csl: numeric.csl
 output:
   ioslides_presentation:
     output_dir: "."
@@ -47,11 +49,17 @@ opts_chunk$set(
 is_latex <- knitr::is_latex_output()
 ```
 
-```{r, echo=FALSE}
-sobj <- simrel(n = 20, p = 10, q = c(5, 4), m = 4,
-               ypos = list(c(1, 4), c(2, 3)),
-               relpos = list(c(1, 2), c(3, 5)), R2 = c(0.8, 0.8),
-               gamma = 0.6, type = "multivariate", eta = 0.2)
+```{r sim_code, echo=FALSE}
+set.seed(777)
+sobj <- simrel(
+  n = 20, p = 10, m = 4,
+  q = c(5, 4),
+  ypos = list(c(1, 4), c(2, 3)),
+  relpos = list(c(1, 2), c(3, 5)), 
+  R2 = c(0.8, 0.8),
+  gamma = 0.6, eta = 0.2,
+  type = "multivariate"
+)
 ```
 
 ## {.flexbox .vcenter .plain}
@@ -99,7 +107,7 @@ if (is_latex) {
 \begincols
 \begincol{0.5\textwidth}
 
-_Reduction of regression Model_: A Predictor sub-space (<span class="blue">blue</span>) is relevant for informative response sub-space (<span class="green">green</span>)
+_Reduction of regression Model_: A Predictor sub-space (<span class="blue">blue</span>) is relevant for informative response sub-space (<span class="green">green</span>). The idea discussed in @helland1994comparison was implemented for single response in @saebo2015simrel.
 
 ```{r}
 if (is_latex) {
@@ -147,7 +155,7 @@ There are $\frac{1}{2}(p + m)(p + m + 1)$ unknowns to identify this model. But, 
 \begincols
 \begincol{0.5\textwidth}
 
-_Reduction of regression Model_: A Predictor sub-space (<span class="blue">blue</span>) is relevant for informative response sub-space (<span class="green">green</span>)
+_Reduction of regression Model_: A Predictor sub-space (<span class="blue">blue</span>) is relevant for informative response sub-space (<span class="green">green</span>). The idea discussed in @helland1994comparison was implemented for single response in @saebo2015simrel.
 
 ```{r}
 if (is_latex) {
@@ -171,7 +179,7 @@ $$
 \end{aligned}
 $$
 
-We need to meet the constrains:
+We need to meet the constrains of _coefficient of determinatin_:
 
 $$
 \begin{aligned}
@@ -189,6 +197,40 @@ $$
 
 \endcol
 \endcols
+
+## Simulation Parameters {.columns-2 .plain}
+
+```{r, echo = FALSE}
+prams <- tibble::tribble(
+  ~"Parameter",   ~"Description",
+  "`n`",          "Number of observations",
+  "`p`",          "Number of predictor variables",
+  "`q`",          "Number of relevant predictor variables",
+  "`m`",          "Number of response variables",
+  "`relpos`",     "Position of predictor components relevant for each response components",
+  "`ypos`",       "Index to combine informative and non-informative response components",
+  "`R2`",         "Coefficient of determination for each response components",
+  "`gamma`",      "Decay factor of eigenvalues of predictor",
+  "`eta`",        "Decay factor of eigenvalues of response"
+
+
+)
+knitr::kable(prams, escape = FALSE, format = ifelse(is_latex, "latex", "html")) %>% 
+  kableExtra::kable_styling(bootstrap_options = "striped", full_width = TRUE)
+```
+
+<div style="break-before: column;"></div>
+
+<h3>Terminology:</h3>
+
+- The informative response space is spanned by _informative **response components**_
+- The relevant predictor space is spanned by _relevant **predictor components**_
+<!-- - Informative response components are _rotated together_ with remaining uninformative response components making all response variables somewhat informative -->
+<!-- - Input parameter for _coefficient of determination_ is used for each response component -->
+
+```{r sim_code, echo=-1, eval=FALSE}
+```
+
 
 ## The Covariance Structure {.columns-3 .plain}
 
@@ -337,14 +379,64 @@ ggsimrelplot(sobj, which = 3)
 \endcol
 \endcols
 
-## Example Simrel {.plain}
+## Application of simrel {.flexbox .vcenter .plain}
 
-## Acknoledgement {.plain}
-- Trygve
-- Solve
-- Franchisco
-- Lars
+<h3>Research</h3>
+<h3>Education</h3>
 
+## Shiny Application and Installation {.flexbox .vcenter .plain}
+
+<h3>Install R-package:</h3>
+
+```{r, eval = FALSE, echo = TRUE}
+if (!require(devtools)) install.packages("devtools")
+devtools::install_github("simulatr/simrel")
+```
+
+<div style="break-before: column;"></div>
+
+<h3>Run Shiny Application</h3>
+
+```{r, eval = FALSE, echo = TRUE}
+if (!require(simrel)) install.packages("simrel")
+shiny::runGitHub("simulatr/AppSimulatr")
+```
+
+## Acknoledgement {.columns-2 .plain}
+
+<div class="card-container">
+<div class="person">
+<div class="image">
+<img src="_images/solve.jpg" alt="trygve" />
+</div>
+<div class="name">
+<h3>Solve Sæbø</h3>
+<p>NMBU</p>
+</div>
+</div>
+<div class="person">
+<div class="image">
+<img src="_images/trygve.jpg" alt="trygve" />
+</div>
+<div class="name">
+<h3>Trygve Almøy</h3>
+<p>BioStatistics, NMBU</p>
+</div>
+</div>
+</div>
+
+
+<div style="break-before: column;"></div>
+
+<div class="thank-you-container">
+<h3>Thank You</h3>
+<div id="extra-thanks">
+<p>BioStatistis</p>
+<p>&</p>
+<p>Friends</p>
+<p>Franchisco & Lars</p>
+</div>
+</div>
 
 ```{r, include = !is_latex, results='asis', echo=FALSE}
 cat("## {data-background='_images/ThankYou.png' data-background-position='center' data-background-size='100% 100%' .plain}")
@@ -355,3 +447,5 @@ cat("## {data-background='_images/ThankYou.png' data-background-position='center
 cat("## {.plain}")
 knitr::include_graphics("_images/ThankYou.png")
 ```
+
+## References

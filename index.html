@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>A versatile tool for simulation of linear model data</title>
+  <title>A versatile tool for simulating linear model data</title>
 
   <meta charset="utf-8">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -20,7 +20,7 @@
     var SLIDE_CONFIG = {
       // Slide settings
       settings: {
-                title: 'A versatile tool for simulation of linear model data',
+                title: 'A versatile tool for simulating linear model data',
                         useBuilds: true,
         usePrettify: true,
         enableSlideAreas: true,
@@ -111,11 +111,11 @@
       <h1 data-config-title><!-- populated from slide_config.json --></h1>
       <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
       <p data-config-presenter><!-- populated from slide_config.json --></p>
-            <p style="margin-top: 6px; margin-left: -2px;">13 Mar, 2018</p>
+            <p style="margin-top: 6px; margin-left: -2px;">14 Mar, 2018</p>
           </hgroup>
   </slide>
 
-<slide class=""><hgroup><h2></h2></hgroup><article  id="section" class="flexbox vcenter plain">
+<slide class=""><hgroup><h2></h2></hgroup><article  class="flexbox vcenter plain" id="section">
 
 <p><img src="_images/papershot.png" width="100%" style="display: block; margin: auto;" /></p>
 
@@ -135,7 +135,7 @@ Even the simplest tools can empower people to do great things
 
 </blockquote>
 
-</article></slide><slide class=""><hgroup><h2>Why Simrel</h2></hgroup><article  id="why-simrel" class="columns-2 plain">
+</article></slide><slide class=""><hgroup><h2>Why Simrel</h2></hgroup><article  class="columns-2 plain" id="why-simrel">
 
 
 
@@ -158,13 +158,13 @@ Even the simplest tools can empower people to do great things
 
 
 
-</article></slide><slide class=""><hgroup><h2>Idea Behind</h2></hgroup><article  id="idea-behind" class="columns-2 plain">
+</article></slide><slide class=""><hgroup><h2>Idea Behind</h2></hgroup><article  class="columns-2 plain" id="idea-behind">
 
 
 
 <p><em>Reduction of regression Model</em>: A Predictor sub-space (<span class="blue">
 blue</span>) is relevant for informative response sub-space (<span class="green">
-green</span>)</p>
+green</span>). The idea discussed in <span class="cite">(1)</span> was implemented for single response in <span class="cite">(2)</span>.</p>
 
 <p><img src="_images/relevant-space.svg" width="100%" style="display: block; margin: auto;" /></p>
 
@@ -205,13 +205,13 @@ R^t\Sigma_{zw}Q &amp; R^t\Sigma_{zz}R
 
 
 
-</article></slide><slide class=""><hgroup><h2>Reduction of Regression Model</h2></hgroup><article  id="reduction-of-regression-model" class="columns-2 plain">
+</article></slide><slide class=""><hgroup><h2>Reduction of Regression Model</h2></hgroup><article  class="columns-2 plain" id="reduction-of-regression-model">
 
 
 
 <p><em>Reduction of regression Model</em>: A Predictor sub-space (<span class="blue">
 blue</span>) is relevant for informative response sub-space (<span class="green">
-green</span>)</p>
+green</span>). The idea discussed in <span class="cite">(1)</span> was implemented for single response in <span class="cite">(2)</span>.</p>
 
 <p><img src="_images/relevant-space.svg" width="100%" style="display: block; margin: auto;" /></p>
 
@@ -229,7 +229,7 @@ green</span>)</p>
 \end{aligned}
 \]</p>
 
-<p>We need to meet the constrains:</p>
+<p>We need to meet the constrains of <em>coefficient of determinatin</em>:</p>
 
 <p>\[
 \begin{aligned}
@@ -247,7 +247,205 @@ green</span>)</p>
 
 
 
-</article></slide><slide class=""><hgroup><h2>The Covariance Structure</h2></hgroup><article  id="the-covariance-structure" class="columns-3 plain">
+</article></slide><slide class=""><hgroup><h2>Simulation Parameters</h2></hgroup><article  class="columns-2 plain" id="simulation-parameters">
+
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+
+<thead>
+
+<tr>
+
+<th style="text-align:left;">
+
+Parameter
+
+</th>
+
+<th style="text-align:left;">
+
+Description
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:left;">
+
+<code>n</code>
+
+</td>
+
+<td style="text-align:left;">
+
+Number of observations
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+<code>p</code>
+
+</td>
+
+<td style="text-align:left;">
+
+Number of predictor variables
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+<code>q</code>
+
+</td>
+
+<td style="text-align:left;">
+
+Number of relevant predictor variables
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+<code>m</code>
+
+</td>
+
+<td style="text-align:left;">
+
+Number of response variables
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+<code>relpos</code>
+
+</td>
+
+<td style="text-align:left;">
+
+Position of predictor components relevant for each response components
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+<code>ypos</code>
+
+</td>
+
+<td style="text-align:left;">
+
+Index to combine informative and non-informative response components
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+<code>R2</code>
+
+</td>
+
+<td style="text-align:left;">
+
+Coefficient of determination for each response components
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+<code>gamma</code>
+
+</td>
+
+<td style="text-align:left;">
+
+Decay factor of eigenvalues of predictor
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+<code>eta</code>
+
+</td>
+
+<td style="text-align:left;">
+
+Decay factor of eigenvalues of response
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+<div style="break-before: column;">
+</div>
+
+<h3>
+
+Terminology:
+
+</h3>
+
+<ul>
+<li>The informative response space is spanned by <em>informative <strong>response components</strong></em></li>
+<li>The relevant predictor space is spanned by <em>relevant <strong>predictor components</strong></em> <!-- - Informative response components are _rotated together_ with remaining uninformative response components making all response variables somewhat informative --> <!-- - Input parameter for _coefficient of determination_ is used for each response component --></li>
+</ul>
+
+<pre class = 'prettyprint lang-r'>sobj &lt;- simrel(
+  n = 20, p = 10, m = 4,
+  q = c(5, 4),
+  ypos = list(c(1, 4), c(2, 3)),
+  relpos = list(c(1, 2), c(3, 5)), 
+  R2 = c(0.8, 0.8),
+  gamma = 0.6, eta = 0.2,
+  type = &quot;multivariate&quot;
+)</pre>
+
+</article></slide><slide class=""><hgroup><h2>The Covariance Structure</h2></hgroup><article  class="columns-3 plain" id="the-covariance-structure">
 
 
 
@@ -291,7 +489,7 @@ R^t\Sigma_{zw}Q &amp; R^t\Sigma_{zz}R
 
 
 
-</article></slide><slide class=""><hgroup><h2>The Covariance Structure</h2></hgroup><article  id="the-covariance-structure-1" class="columns-3 plain">
+</article></slide><slide class=""><hgroup><h2>The Covariance Structure</h2></hgroup><article  class="columns-3 plain" id="the-covariance-structure-1">
 
 
 
@@ -335,7 +533,7 @@ R^t\Sigma_{zw}Q &amp; R^t\Sigma_{zz}R
 
 
 
-</article></slide><slide class=""><hgroup><h2>Accessing Properties of Data</h2></hgroup><article  id="accessing-properties-of-data" class="columns-3 plain">
+</article></slide><slide class=""><hgroup><h2>Accessing Properties of Data</h2></hgroup><article  class="columns-3 plain" id="accessing-properties-of-data">
 
 
 
@@ -357,18 +555,125 @@ R^t\Sigma_{zw}Q &amp; R^t\Sigma_{zz}R
 
 
 
-</article></slide><slide class=""><hgroup><h2>Example Simrel</h2></hgroup><article  id="example-simrel" class="plain">
+</article></slide><slide class=""><hgroup><h2>Application of simrel</h2></hgroup><article  class="flexbox vcenter plain" id="application-of-simrel">
 
-</article></slide><slide class=""><hgroup><h2>Acknoledgement</h2></hgroup><article  id="acknoledgement" class="plain">
+<h3>
 
-<ul>
-<li>Trygve</li>
-<li>Solve</li>
-<li>Franchisco</li>
-<li>Lars</li>
-</ul>
+Research
 
-</article></slide><slide class="fill nobackground" style="background-image: url(_images/ThankYou.png); background-size: 100% 100%; background-position: center;"><hgroup><h2></h2></hgroup><article  class="plain" id="section-1"></article></slide>
+</h3>
+
+<h3>
+
+Education
+
+</h3>
+
+</article></slide><slide class=""><hgroup><h2>Shiny Application and Installation</h2></hgroup><article  class="flexbox vcenter plain" id="shiny-application-and-installation">
+
+<h3>
+
+Install R-package:
+
+</h3>
+
+<pre class = 'prettyprint lang-r'>if (!require(devtools)) install.packages(&quot;devtools&quot;)
+devtools::install_github(&quot;simulatr/simrel&quot;)</pre>
+
+<div style="break-before: column;">
+</div>
+
+<h3>
+
+Run Shiny Application
+
+</h3>
+
+<pre class = 'prettyprint lang-r'>if (!require(simrel)) install.packages(&quot;simrel&quot;)
+shiny::runGitHub(&quot;simulatr/AppSimulatr&quot;)</pre>
+
+</article></slide><slide class=""><hgroup><h2>Acknoledgement</h2></hgroup><article  class="columns-2 plain" id="acknoledgement">
+
+<div class="card-container">
+<div class="person">
+<div class="image">
+<p><img src="_images/solve.jpg" alt="trygve" /></p></div>
+
+<div class="name">
+<h3>
+
+Solve Sæbø
+
+</h3>
+
+<p>
+
+NMBU
+
+</p></div></div>
+
+<div class="person">
+<div class="image">
+<p><img src="_images/trygve.jpg" alt="trygve" /></p></div>
+
+<div class="name">
+<h3>
+
+Trygve Almøy
+
+</h3>
+
+<p>
+
+BioStatistics, NMBU
+
+</p></div></div></div>
+
+<div style="break-before: column;">
+</div>
+
+<div class="thank-you-container">
+<h3>
+
+Thank You
+
+</h3>
+
+<div id="extra-thanks">
+<p>
+
+BioStatistis
+
+</p>
+
+<p>
+
+&amp;
+
+</p>
+
+<p>
+
+Friends
+
+</p>
+
+<p>
+
+Franchisco &amp; Lars
+
+</p></div></div>
+
+</article></slide><slide class="fill nobackground" style="background-image: url(_images/ThankYou.png); background-size: 100% 100%; background-position: center;"><hgroup><h2></h2></hgroup><article  class="plain" id="section-1">
+
+</article></slide><slide class=""><hgroup><h2>References</h2></hgroup><article  class="unnumbered" id="references">
+
+<div class="references" id="refs">
+<div id="ref-helland1994comparison">
+<p>1. HELLAND, Inge S and ALMØY, Trygve. Comparison of prediction methods when only a few components are relevant. <em>Journal of the American Statistical Association</em>. 1994. Vol. 89, no. 426, p. 583–591. </p></div>
+
+<div id="ref-saebo2015simrel">
+<p>2. SÆBØ, Solve, ALMØY, Trygve and HELLAND, Inge S. Simrel – a versatile tool for linear model data simulation based on the concept of a relevant subspace and relevant predictors. <em>Chemometrics and Intelligent Laboratory Systems</em>. 2015. </p></div></div></article></slide>
 
 
   <slide class="backdrop"></slide>

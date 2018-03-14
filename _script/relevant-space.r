@@ -1,6 +1,6 @@
 library(grid)
-# svg(filename = "_images/relevant-space.svg", width = 7, height = 5, pointsize = 16)
-pdf(file = "_images/relevant-space.pdf", width = 7, height = 5)
+svg(filename = "_images/relevant-space.svg", width = 7, height = 5, pointsize = 16)
+# pdf(file = "_images/relevant-space.pdf", width = 7, height = 5)
 # png(file = "_images/relevant-space.png", width = 1200,
 #     height = 800, res = 200, bg = "transparent")
 
@@ -96,8 +96,8 @@ big_arrow <- function(lw = 22, color = "grey40"){
                          lineend = "butt",
                          col = color))
 }
-grid.draw(big_arrow(25, "grey50"))
-grid.draw(big_arrow(20, "grey90"))
+grid.draw(big_arrow(25, "grey70"))
+grid.draw(big_arrow(20, "grey80"))
 
 ## Arrows to annotate relevant X and Y spaces ----
 grid.segments(x0 = c(y_x0 + y_width/2, x_x0 + x_width/2), 
