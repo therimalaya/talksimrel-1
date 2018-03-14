@@ -215,3 +215,29 @@ article#acknoledgement .card-container .person img{
 #acknoledgement .thank-you-container #extra-thanks p:first-child{
   font-size: 1.4em;
 }
+
+div#refs {
+    font-size: 0.8em;
+    column-count: 2;
+    font-family: Palatino;
+}
+
+#get-started{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 400px;
+    width: 450px;
+    align-items: center;
+    background-color: whitesmoke;
+    margin: 0 auto;
+    line-height: 0;
+}
+#get-started h3{
+  background-color: initial;
+  font-family: "EB Garamond", "Palatino", "Bookman old";
+  font-size: 3em;
+  text-align: center;
+  width: 80%;
+  line-height: 1em;
+}

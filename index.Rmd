@@ -2,14 +2,11 @@
 title: "A versatile tool for simulating linear model data"
 author: Raju Rimal, Trygve Almøy and Solve Sæbø
 date: "`r format(Sys.Date(), '%d %b, %Y')`"
-institute: |
-  Faculty of Chemistry and Bioinformatics (KBM)
-
-  Norwegian University of Life Scienes (NMBU)
 fontsize: 10pt
 linestretch: 1.25
 bibliography: references.bib
 csl: numeric.csl
+nocite: '@Rimal_2018'
 output:
   ioslides_presentation:
     output_dir: "."
@@ -22,13 +19,6 @@ output:
     logo: '_images/logo.png'
     smaller: no
     widescreen: yes
-  beamer_presentation:
-    dev: pdf
-    includes:
-      in_header: '_header.tex'
-    theme: CambridgeUS
-    colortheme: seahorse
-# runtime: shiny
 editor_options:
   chunk_output_type: console
 ---
@@ -62,7 +52,7 @@ sobj <- simrel(
 )
 ```
 
-## {.flexbox .vcenter .plain}
+## {.flexbox .vcenter}
 
 ```{r}
 knitr::include_graphics("_images/papershot.png")
@@ -73,10 +63,7 @@ knitr::include_graphics("_images/papershot.png")
 <footer>— Biz Stone, <cite>Things a Little Bird Told Me: Confessions of the Creative Mind</cite></footer>
 </blockquote>
 
-## Why Simrel {.columns-2 .plain}
-
-\begincols
-\begincol{0.5\textwidth}
+## Why Simrel {.columns-2}
 
 - Simulated data is __used everywhere__ in research to compare methods, models, algorithms, techniques etc. `Simrel` can be a common tool for such purpose
 
@@ -88,9 +75,6 @@ knitr::include_graphics("_images/papershot.png")
 
 <div style="break-before: column;"></div>
 
-\endcol
-\begincol{0.5\textwidth}
-
 ```{r}
 if (is_latex) {
   knitr::include_graphics("_images/multicollinearity.pdf")
@@ -99,13 +83,7 @@ if (is_latex) {
 }
 ```
 
-\endcol
-\endcols
-
-## Idea Behind {.columns-2 .plain}
-
-\begincols
-\begincol{0.5\textwidth}
+## Idea Behind {.columns-2}
 
 _Reduction of regression Model_: A Predictor sub-space (<span class="blue">blue</span>) is relevant for informative response sub-space (<span class="green">green</span>). The idea discussed in @helland1994comparison was implemented for single response in @saebo2015simrel.
 
@@ -118,9 +96,6 @@ if (is_latex) {
 ```
 
 <div style="break-before: column;"></div>
-
-\endcol
-\begincol{0.5\textwidth}
 
 <h3>The Model:</h3>
 $$\begin{bmatrix}y \\ x \end{bmatrix} \sim \text{N}\left(
@@ -147,13 +122,8 @@ R^t\Sigma_{zw}Q & R^t\Sigma_{zz}R
 
 There are $\frac{1}{2}(p + m)(p + m + 1)$ unknowns to identify this model. But, ...
 
-\endcol
-\endcols
+## Reduction of Regression Model {.columns-2}
 
-## Reduction of Regression Model {.columns-2 .plain}
-
-\begincols
-\begincol{0.5\textwidth}
 
 _Reduction of regression Model_: A Predictor sub-space (<span class="blue">blue</span>) is relevant for informative response sub-space (<span class="green">green</span>). The idea discussed in @helland1994comparison was implemented for single response in @saebo2015simrel.
 
@@ -167,8 +137,6 @@ if (is_latex) {
 
 <div style="break-before: column;"></div>
 
-\endcol
-\begincol{0.5\textwidth}
 
 $$
 \begin{aligned}
@@ -184,7 +152,7 @@ We need to meet the constrains of _coefficient of determinatin_:
 $$
 \begin{aligned}
 \rho_w^2 &= \Sigma_{ww}^{-1/2} \Sigma_{zw}^{t} \Sigma_{zz}^{-1} \Sigma_{zw} \Sigma_{ww}^{-1/2} \\
- &= \frac{\sigma_{ij}^t \Lambda ^{-1} \sigma_{ij'}}{\sqrt{\sigma_j^2\sigma_{j'}^2}} \forall j, j' = 1 \ldots m
+\left(\rho_w^2\right)_{ij} &= \frac{\sigma_{ij}^t \Lambda ^{-1} \sigma_{ij'}}{\sqrt{\sigma_j^2\sigma_{j'}^2}} \forall j, j' = 1 \ldots m
 \end{aligned}
 $$
 
@@ -195,10 +163,7 @@ $$
   = \sum_{i\in \mathcal{P}}{\frac{\sigma^2_{ij}}{\lambda_i\kappa_j}}
 $$
 
-\endcol
-\endcols
-
-## Simulation Parameters {.columns-2 .plain}
+## Simulation Parameters {.columns-2}
 
 ```{r, echo = FALSE}
 prams <- tibble::tribble(
@@ -232,7 +197,7 @@ knitr::kable(prams, escape = FALSE, format = ifelse(is_latex, "latex", "html")) 
 ```
 
 
-## The Covariance Structure {.columns-3 .plain}
+## The Covariance Structure {.columns-3}
 
 ```{r}
 plt_types <- c("relpos", "rotation", "relpred")
@@ -244,9 +209,6 @@ plts <- lapply(plt_types, function(t){
 })
 ```
 
-
-\begincols
-\begincol{0.32\textwidth}
 
 ```{r, out.width='100%', message=FALSE, warning=FALSE, fig.width=3.5, fig.asp=1, dpi=300}
 plts[["relpos"]][[1]]
@@ -261,8 +223,7 @@ $$
 $$
 
 <div style="break-before: column;"></div>
-\endcol
-\begincol{0.32\textwidth}
+
 
 ```{r, out.width='100%', message=FALSE, warning=FALSE, fig.width=3.5, fig.asp=1, dpi=300}
 plts[["rotation"]][[1]]
@@ -281,8 +242,7 @@ R^t\Sigma_{zw}Q & R^t\Sigma_{zz}R
 $$
 
 <div style="break-before: column;"></div>
-\endcol
-\begincol{0.32\textwidth}
+
 
 ```{r, out.width='100%', message=FALSE, warning=FALSE, fig.width=3.5, fig.asp=1, dpi=300}
 plts[["relpred"]][[1]]
@@ -292,13 +252,9 @@ Define,
 $$\underset{n\times(m+p)}{G} = U\Sigma^{-1/2}$$
 $$\text{such that, } \text{cov}(G) = \Sigma$$
 
-\endcol
-\endcols
 
-## The Covariance Structure {.columns-3 .plain}
+## The Covariance Structure {.columns-3}
 
-\begincols
-\begincol{0.32\textwidth}
 
 ```{r, out.width='100%', message=FALSE, warning=FALSE, fig.width=3.5, fig.asp=1, dpi=300}
 plts[["relpos"]][[2]]
@@ -313,8 +269,6 @@ $$
 $$
 
 <div style="break-before: column;"></div>
-\endcol
-\begincol{0.32\textwidth}
 
 ```{r, out.width='100%', message=FALSE, warning=FALSE, fig.width=3.5, fig.asp=1, dpi=300}
 plts[["rotation"]][[2]]
@@ -335,8 +289,6 @@ $$
 
 <div style="break-before: column;"></div>
 
-\endcol
-\begincol{0.32\textwidth}
 
 ```{r, out.width='100%', message=FALSE, warning=FALSE, fig.width=3.5, fig.asp=1, dpi=300}
 plts[["relpred"]][[2]]
@@ -348,43 +300,59 @@ $$\underset{n\times(m+p)}{G} = U\Sigma^{-1/2}$$
 $$\text{such that, } \text{cov}(G) = \Sigma$$
 
 
-\endcol
-\endcols
-
-## Accessing Properties of Data {.columns-3 .plain}
-
-\begincols
-\begincol{0.32\textwidth}
+## Accessing Properties of Data {.columns-3}
 
 ```{r, fig.width=4}
 ggsimrelplot(sobj, which = 1)
 ```
 
+Relevant predictors has non-zero coefficients
+
 <div style="break-before: column;"></div>
-\endcol
-\begincol{0.32\textwidth}
+
 
 ```{r, fig.width=4}
 ggsimrelplot(sobj, which = 2)
 ```
 
+Predictor components 3 and 5 (with low eigenvalues) are relevant to response component $W_2$
+
 <div style="break-before: column;"></div>
-\endcol
-\begincol{0.32\textwidth}
 
 ```{r, fig.width=4}
 ggsimrelplot(sobj, which = 3)
 ```
 
-\endcol
-\endcols
+The properties propagate to related response variables
 
-## Application of simrel {.flexbox .vcenter .plain}
+## Application of simrel {.columns-2}
 
+```{r}
+library(RefManageR)
+bib_file <- ReadBib("references.bib")
+```
+
+<div id="app-research">
 <h3>Research</h3>
-<h3>Education</h3>
+Most of the research papers use simulated data. Here are just few mentions:
 
-## Shiny Application and Installation {.flexbox .vcenter .plain}
+```{r, results='asis'}
+bib_out <- sapply(bib_file[c(6, 15, 18, 31)], function(x) {
+  paste0("\n- ", x$title, " @", x$key)
+})
+cat(bib_out)
+```
+
+</div>
+
+<div style="break-before: column;"></div>
+
+<h3>Education</h3>
+<div id="get-started">
+<h3>Let's Get Started</h3>
+</div>
+
+## Shiny Application and Installation {.flexbox .vcenter}
 
 <h3>Install R-package:</h3>
 
@@ -402,7 +370,7 @@ if (!require(simrel)) install.packages("simrel")
 shiny::runGitHub("simulatr/AppSimulatr")
 ```
 
-## Acknoledgement {.columns-2 .plain}
+## Acknoledgement {.columns-2}
 
 <div class="card-container">
 <div class="person">
@@ -439,7 +407,7 @@ shiny::runGitHub("simulatr/AppSimulatr")
 </div>
 
 ```{r, include = !is_latex, results='asis', echo=FALSE}
-cat("## {data-background='_images/ThankYou.png' data-background-position='center' data-background-size='100% 100%' .plain}")
+cat("## {data-background='_images/ThankYou.png' data-background-position='center' data-background-size='100% 100%'}")
 ```
 
 
@@ -448,4 +416,4 @@ cat("## {.plain}")
 knitr::include_graphics("_images/ThankYou.png")
 ```
 
-## References
+## References  {.small} 

@@ -115,7 +115,7 @@
           </hgroup>
   </slide>
 
-<slide class=""><hgroup><h2></h2></hgroup><article  class="flexbox vcenter plain" id="section">
+<slide class=""><hgroup><h2></h2></hgroup><article  class="flexbox vcenter" id="section">
 
 <p><img src="_images/papershot.png" width="100%" style="display: block; margin: auto;" /></p>
 
@@ -135,9 +135,7 @@ Even the simplest tools can empower people to do great things
 
 </blockquote>
 
-</article></slide><slide class=""><hgroup><h2>Why Simrel</h2></hgroup><article  class="columns-2 plain" id="why-simrel">
-
-
+</article></slide><slide class=""><hgroup><h2>Why Simrel</h2></hgroup><article  class="columns-2" id="why-simrel">
 
 <ul>
 <li><p>Simulated data is <strong>used everywhere</strong> in research to compare methods, models, algorithms, techniques etc. <code>Simrel</code> can be a common tool for such purpose</p></li>
@@ -152,26 +150,18 @@ Even the simplest tools can empower people to do great things
 <div style="break-before: column;">
 </div>
 
-
-
 <p><img src="_images/multicollinearity.gif" width="100%" style="display: block; margin: auto;" /></p>
 
-
-
-</article></slide><slide class=""><hgroup><h2>Idea Behind</h2></hgroup><article  class="columns-2 plain" id="idea-behind">
-
-
+</article></slide><slide class=""><hgroup><h2>Idea Behind</h2></hgroup><article  class="columns-2" id="idea-behind">
 
 <p><em>Reduction of regression Model</em>: A Predictor sub-space (<span class="blue">
 blue</span>) is relevant for informative response sub-space (<span class="green">
-green</span>). The idea discussed in <span class="cite">(1)</span> was implemented for single response in <span class="cite">(2)</span>.</p>
+green</span>). The idea discussed in <span class="cite">1</span> was implemented for single response in <span class="cite">2</span>.</p>
 
 <p><img src="_images/relevant-space.svg" width="100%" style="display: block; margin: auto;" /></p>
 
 <div style="break-before: column;">
 </div>
-
-
 
 <h3>
 
@@ -203,22 +193,16 @@ R^t\Sigma_{zw}Q &amp; R^t\Sigma_{zz}R
 
 <p>There are \(\frac{1}{2}(p + m)(p + m + 1)\) unknowns to identify this model. But, …</p>
 
-
-
-</article></slide><slide class=""><hgroup><h2>Reduction of Regression Model</h2></hgroup><article  class="columns-2 plain" id="reduction-of-regression-model">
-
-
+</article></slide><slide class=""><hgroup><h2>Reduction of Regression Model</h2></hgroup><article  class="columns-2" id="reduction-of-regression-model">
 
 <p><em>Reduction of regression Model</em>: A Predictor sub-space (<span class="blue">
 blue</span>) is relevant for informative response sub-space (<span class="green">
-green</span>). The idea discussed in <span class="cite">(1)</span> was implemented for single response in <span class="cite">(2)</span>.</p>
+green</span>). The idea discussed in <span class="cite">1</span> was implemented for single response in <span class="cite">2</span>.</p>
 
 <p><img src="_images/relevant-space.svg" width="100%" style="display: block; margin: auto;" /></p>
 
 <div style="break-before: column;">
 </div>
-
-
 
 <p>\[
 \begin{aligned}
@@ -234,7 +218,7 @@ green</span>). The idea discussed in <span class="cite">(1)</span> was implement
 <p>\[
 \begin{aligned}
 \rho_w^2 &amp;= \Sigma_{ww}^{-1/2} \Sigma_{zw}^{t} \Sigma_{zz}^{-1} \Sigma_{zw} \Sigma_{ww}^{-1/2} \\
- &amp;= \frac{\sigma_{ij}^t \Lambda ^{-1} \sigma_{ij&#39;}}{\sqrt{\sigma_j^2\sigma_{j&#39;}^2}} \forall j, j&#39; = 1 \ldots m
+\left(\rho_w^2\right)_{ij} &amp;= \frac{\sigma_{ij}^t \Lambda ^{-1} \sigma_{ij&#39;}}{\sqrt{\sigma_j^2\sigma_{j&#39;}^2}} \forall j, j&#39; = 1 \ldots m
 \end{aligned}
 \]</p>
 
@@ -245,9 +229,7 @@ green</span>). The idea discussed in <span class="cite">(1)</span> was implement
   = \sum_{i\in \mathcal{P}}{\frac{\sigma^2_{ij}}{\lambda_i\kappa_j}}
 \]</p>
 
-
-
-</article></slide><slide class=""><hgroup><h2>Simulation Parameters</h2></hgroup><article  class="columns-2 plain" id="simulation-parameters">
+</article></slide><slide class=""><hgroup><h2>Simulation Parameters</h2></hgroup><article  class="columns-2" id="simulation-parameters">
 
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 
@@ -445,9 +427,7 @@ Terminology:
   type = &quot;multivariate&quot;
 )</pre>
 
-</article></slide><slide class=""><hgroup><h2>The Covariance Structure</h2></hgroup><article  class="columns-3 plain" id="the-covariance-structure">
-
-
+</article></slide><slide class=""><hgroup><h2>The Covariance Structure</h2></hgroup><article  class="columns-3" id="the-covariance-structure">
 
 <p><img src="index_files/figure-html/unnamed-chunk-8-1.svg" width="100%" style="display: block; margin: auto;" /></p>
 
@@ -461,8 +441,6 @@ Terminology:
 
 <div style="break-before: column;">
 </div>
-
-
 
 <p><img src="index_files/figure-html/unnamed-chunk-9-1.svg" width="100%" style="display: block; margin: auto;" /></p>
 
@@ -481,17 +459,11 @@ R^t\Sigma_{zw}Q &amp; R^t\Sigma_{zz}R
 <div style="break-before: column;">
 </div>
 
-
-
 <p><img src="index_files/figure-html/unnamed-chunk-10-1.svg" width="100%" style="display: block; margin: auto;" /></p>
 
 <p>Define, \[\underset{n\times(m+p)}{G} = U\Sigma^{-1/2}\] \[\text{such that, } \text{cov}(G) = \Sigma\]</p>
 
-
-
-</article></slide><slide class=""><hgroup><h2>The Covariance Structure</h2></hgroup><article  class="columns-3 plain" id="the-covariance-structure-1">
-
-
+</article></slide><slide class=""><hgroup><h2>The Covariance Structure</h2></hgroup><article  class="columns-3" id="the-covariance-structure-1">
 
 <p><img src="index_files/figure-html/unnamed-chunk-11-1.svg" width="100%" style="display: block; margin: auto;" /></p>
 
@@ -505,8 +477,6 @@ R^t\Sigma_{zw}Q &amp; R^t\Sigma_{zz}R
 
 <div style="break-before: column;">
 </div>
-
-
 
 <p><img src="index_files/figure-html/unnamed-chunk-12-1.svg" width="100%" style="display: block; margin: auto;" /></p>
 
@@ -525,43 +495,50 @@ R^t\Sigma_{zw}Q &amp; R^t\Sigma_{zz}R
 <div style="break-before: column;">
 </div>
 
-
-
 <p><img src="index_files/figure-html/unnamed-chunk-13-1.svg" width="100%" style="display: block; margin: auto;" /></p>
 
 <p>Define, \[\underset{n\times(m+p)}{G} = U\Sigma^{-1/2}\] \[\text{such that, } \text{cov}(G) = \Sigma\]</p>
 
-
-
-</article></slide><slide class=""><hgroup><h2>Accessing Properties of Data</h2></hgroup><article  class="columns-3 plain" id="accessing-properties-of-data">
-
-
+</article></slide><slide class=""><hgroup><h2>Accessing Properties of Data</h2></hgroup><article  class="columns-3" id="accessing-properties-of-data">
 
 <p><img src="index_files/figure-html/unnamed-chunk-14-1.svg" width="100%" style="display: block; margin: auto;" /></p>
 
+<p>Relevant predictors has non-zero coefficients</p>
+
 <div style="break-before: column;">
 </div>
-
-
 
 <p><img src="index_files/figure-html/unnamed-chunk-15-1.svg" width="100%" style="display: block; margin: auto;" /></p>
 
+<p>Predictor components 3 and 5 (with low eigenvalues) are relevant to response component \(W_2\)</p>
+
 <div style="break-before: column;">
 </div>
 
-
-
 <p><img src="index_files/figure-html/unnamed-chunk-16-1.svg" width="100%" style="display: block; margin: auto;" /></p>
 
+<p>The properties propagate to related response variables</p>
 
+</article></slide><slide class=""><hgroup><h2>Application of simrel</h2></hgroup><article  class="columns-2" id="application-of-simrel">
 
-</article></slide><slide class=""><hgroup><h2>Application of simrel</h2></hgroup><article  class="flexbox vcenter plain" id="application-of-simrel">
-
+<div id="app-research">
 <h3>
 
 Research
 
 </h3>
+
+<p>Most of the research papers use simulated data. Here are just few mentions:</p>
+
+<ul>
+<li>Theoretical evaluation of prediction error in linear regression with a bivariate response variable containing missing data <span class="cite">3</span></li>
+<li>A note on fast envelope estimation <span class="cite">4</span></li>
+<li>Near optimal prediction from relevant components <span class="cite">5</span></li>
+<li>A simulation study on comparison of prediction methods when only a few components are relevant <span class="cite">6</span></li>
+</ul></div>
+
+<div style="break-before: column;">
+</div>
 
 <h3>
 
@@ -569,7 +546,14 @@ Education
 
 </h3>
 
-</article></slide><slide class=""><hgroup><h2>Shiny Application and Installation</h2></hgroup><article  class="flexbox vcenter plain" id="shiny-application-and-installation">
+<div id="get-started">
+<h3>
+
+Let’s Get Started
+
+</h3></div>
+
+</article></slide><slide class=""><hgroup><h2>Shiny Application and Installation</h2></hgroup><article  class="flexbox vcenter" id="shiny-application-and-installation">
 
 <h3>
 
@@ -592,7 +576,7 @@ Run Shiny Application
 <pre class = 'prettyprint lang-r'>if (!require(simrel)) install.packages(&quot;simrel&quot;)
 shiny::runGitHub(&quot;simulatr/AppSimulatr&quot;)</pre>
 
-</article></slide><slide class=""><hgroup><h2>Acknoledgement</h2></hgroup><article  class="columns-2 plain" id="acknoledgement">
+</article></slide><slide class=""><hgroup><h2>Acknoledgement</h2></hgroup><article  class="columns-2" id="acknoledgement">
 
 <div class="card-container">
 <div class="person">
@@ -664,16 +648,31 @@ Franchisco &amp; Lars
 
 </p></div></div>
 
-</article></slide><slide class="fill nobackground" style="background-image: url(_images/ThankYou.png); background-size: 100% 100%; background-position: center;"><hgroup><h2></h2></hgroup><article  class="plain" id="section-1">
+</article></slide><slide class="fill nobackground" style="background-image: url(_images/ThankYou.png); background-size: 100% 100%; background-position: center;"><hgroup><h2></h2></hgroup><article  id="section-1">
 
-</article></slide><slide class=""><hgroup><h2>References</h2></hgroup><article  class="unnumbered" id="references">
+</article></slide><slide class=""><hgroup><h2>References</h2></hgroup><article  class="unnumbered small" id="references">
 
 <div class="references" id="refs">
 <div id="ref-helland1994comparison">
-<p>1. HELLAND, Inge S and ALMØY, Trygve. Comparison of prediction methods when only a few components are relevant. <em>Journal of the American Statistical Association</em>. 1994. Vol. 89, no. 426, p. 583–591. </p></div>
+<p>1. Helland IS, Almøy T. Comparison of prediction methods when only a few components are relevant. <em>Journal of the American Statistical Association</em>. 1994;<strong>89</strong>(426):583-591.</p></div>
 
 <div id="ref-saebo2015simrel">
-<p>2. SÆBØ, Solve, ALMØY, Trygve and HELLAND, Inge S. Simrel – a versatile tool for linear model data simulation based on the concept of a relevant subspace and relevant predictors. <em>Chemometrics and Intelligent Laboratory Systems</em>. 2015. </p></div></div></article></slide>
+<p>2. Sæbø S, Almøy T, Helland IS. Simrel – a versatile tool for linear model data simulation based on the concept of a relevant subspace and relevant predictors. <em>Chemometrics and Intelligent Laboratory Systems</em>. 2015.</p></div>
+
+<div id="ref-gangsei2016theoretical">
+<p>3. Gangsei LE, Almøy T, Sæbø S. Theoretical evaluation of prediction error in linear regression with a bivariate response variable containing missing data. <em>Communications in Statistics - Theory and Methods</em>. 2016;<strong>0</strong>(0):1-9. doi:<a href='https://doi.org/10.1080/03610926.2016.1222434' title=''>10.1080/03610926.2016.1222434</a>.</p></div>
+
+<div id="ref-cook2016note">
+<p>4. Cook RD, Forzani L, Su Z. A note on fast envelope estimation. <em>Journal of Multivariate Analysis</em>. 2016;<strong>150</strong>:42-54.</p></div>
+
+<div id="ref-helland2012near">
+<p>5. Helland IS, Saebø S, Tjelmeland H, others. Near optimal prediction from relevant components. <em>Scandinavian Journal of Statistics</em>. 2012;<strong>39</strong>(4):695-713.</p></div>
+
+<div id="ref-Alm_y_1996">
+<p>6. Almøy T. A simulation study on comparison of prediction methods when only a few components are relevant. <em>Computational Statistics &amp; Data Analysis</em>. 1996;<strong>21</strong>(1):87-107. doi:<a href='https://doi.org/10.1016/0167-9473(95)00006-2' title=''>10.1016/0167-9473(95)00006-2</a>.</p></div>
+
+<div id="ref-Rimal_2018">
+<p>7. Rimal R, Almøy T, ø SS. A tool for simulating multi-response linear model data. <em>Chemometrics and Intelligent Laboratory Systems</em>. 2018;<strong>176</strong>:1-10. doi:<a href='https://doi.org/10.1016/j.chemolab.2018.02.009' title=''>10.1016/j.chemolab.2018.02.009</a>.</p></div></div></article></slide>
 
 
   <slide class="backdrop"></slide>
