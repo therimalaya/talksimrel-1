@@ -1,2 +1,2 @@
 all:
-	Rscript -e "rmarkdown::render('Classification.Rmd', output_format = 'all')"
+	Rscript -e "rmarkdown::render('index.Rmd', output_format = 'all')"
